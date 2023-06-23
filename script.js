@@ -1,21 +1,5 @@
 const books = [
     {
-        title: 'В стране невыученных уроков',
-        authors: 'Гераскина Лия Борисовна',
-        editor: 'Самовар',
-        year: '2013',
-        image: 'https://img3.labirint.ru/rc/02e128e496e28abfc08ac859a8e78d84/363x561q80/books4/32715/cover.jpg?1370355905'
-    },
- 
-    {
-        title: 'Желтый туман',
-        authors: 'Волков Александр Мелентьевич',
-        editor: 'Самовар',
-        year: '2014',
-        image: 'https://img3.labirint.ru/rc/b8a6d5ffb869ee7f9a002fdd1667cc37/363x561q80/books24/238633/cover.jpg?1280394613'
-    },
- 
-    {
         title: 'Живая шляпа и другие любимые рассказы',
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
@@ -26,17 +10,17 @@ const books = [
     {
         title: 'Денискины рассказы',
         authors: 'Драгунский Виктор Юзефович',
-        year: '2014',
-        editor: 'Самовар',
-        image: 'https://img4.labirint.ru/rc/bbe422f59a0eff1da98ff85eaf3fcdde/363x561q80/books21/207572/cover.jpg?1280394613'
+        year: '2022',
+        editor: 'Махаон',
+        image: 'https://img4.labirint.ru/rc/9b06922b3062dbd468d68baf98d05989/363x561q80/books92/911472/cover.jpg?1682090772'
     },
  
     {
-        title: 'Медвежонок Паддингтон и его невероятные приключения',
-        authors: 'Бонд Майкл',
-        editor: 'Азбука',
-        year: '2022',
-        image: 'https://img3.labirint.ru/rc/d8ccd154d31ae06851cfae5dfeb10866/363x561q80/books49/482941/cover.jpg?1670138704'
+        title: 'Что я видел',
+        authors: 'Житков Борис Степанович',
+        editor: 'Стрекоза',
+        year: '2017',
+        image: 'https://img4.labirint.ru/rc/098e2a01f7958ebc673b00faa1b429f2/363x561q80/books61/600816/cover.png?1575448326'
     },
  
     {
@@ -44,7 +28,42 @@ const books = [
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
         year: '2022',
-        image: 'https://img3.labirint.ru/rc/b8a6d5ffb869ee7f9a002fdd1667cc37/363x561q80/books24/238633/cover.jpg?1280394613'
+        image: 'https://img4.labirint.ru/rc/b8a67479de868380e5b692624880efac/363x561q80/books35/348836/cover.jpg?1686223741'
+    },
+
+    {
+        title: 'В стране невыученных уроков',
+        authors: 'Гераскина Лия Борисовна',
+        editor: 'Азбука',
+        year: '2023',
+        image: 'https://img3.labirint.ru/rc/bf85ec6bb781f466a088d4dc8d250c68/363x561q80/books93/925537/cover.jpg?1680791181'
+    },
+ 
+    {
+        title: 'Айболит и другие сказки',
+        authors: 'Чуковский Корней Иванович',
+        editor: 'Стрекоза',
+        year: '2023',
+        image: 'https://img4.labirint.ru/rc/ab8890a71acdff5bbd8f0c346eab429c/363x561q80/books94/931026/cover.jpg?1675869938'
     }
  
 ]
+
+const container = document.getElementById('container')
+
+books.forEach((book) => {
+    container.innerHTML += `
+        <div class="book" id="book">
+            <img src="${book.image}" class="book-image"/>
+            <p class="book-title">${book.title}</p>
+            <p class="book-year">${book.year}</p>
+            <p class="book-authors">${book.authors}</p>
+            <p class="book-editor">${book.editor}</p>
+
+            <div class="buttons">
+                <button class="change-button">Изменить</button>
+                <button class="delete-button">Удалить</button>
+            </div>
+        </div>
+    `
+})
