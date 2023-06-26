@@ -108,6 +108,7 @@ h1 {
 .change-button, .delete-button {
     width: 120px;
     font-size: 18px;
+    color: #664a2ac2;
     background-color: #ffe6d4a1;
     margin: 5px;
     border: 1px solid #664a2ac2;
