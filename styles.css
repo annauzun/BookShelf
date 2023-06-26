@@ -68,7 +68,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     width: 300px;
-    height: 550px;
+    height: auto;
     box-shadow: 3px 3px 3px #c5d1dd;
     border-radius: 10px;
     padding: 15px;
@@ -99,6 +99,22 @@ h1 {
     padding: 10px;
 }
 
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.change-button, .delete-button {
+    width: 120px;
+    font-size: 18px;
+    background-color: #ffe6d4a1;
+    margin: 5px;
+    border: 1px solid #664a2ac2;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 @media (max-width: 1024px) {
     #hero {
         height: 350px;
@@ -112,5 +128,41 @@ h1 {
         width: 75%;
         margin-top: 17%;
         margin-left: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero {
+        height: 300px;
+    }
+    
+    h1 {
+        font-size: 48px;
+    }
+    .hero-text {
+        font-size: 24px;
+        margin-top: 20%;
+    }
+}
+
+@media (max-width: 600px) {
+   
+    .hero-text {
+        font-size: 18px;
+        width: 75%;
+        margin-top: 28%;
+        margin-left: 30px;
+    }
+
+    .hero-author {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 450px) {
+   
+    .hero-text {
+        font-size: 18px;
+        margin-top: 33%;
     }
 }
