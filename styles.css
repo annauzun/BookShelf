@@ -54,6 +54,27 @@ h1 {
     width: 55%;
 }
 
+.hero-button {
+    width: auto;
+    background-color: rgba(245, 222, 12, 0.5);
+    font-size: 24px;
+    padding: 5px 10px;
+    border: 1px solid rgba(245, 222, 12, 0.5);
+
+}
+
+.hero-button:hover {
+    border: 1px solid #c5d1dd;
+    box-shadow: 3px 3px 3px #c5d1dd;
+}    
+
+.add-newBook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #664a2a;
+}
+
 #container {
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +126,7 @@ h1 {
     justify-content: center;
 }
 
-.change-button, .delete-button {
+button {
     width: 120px;
     font-size: 18px;
     color: #664a2ac2;

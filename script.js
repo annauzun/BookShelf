@@ -51,19 +51,52 @@ const books = [
 
 const container = document.getElementById('container')
 
-books.forEach((book) => {
-    container.innerHTML += `
-        <div class="book" id="book">
-            <img src="${book.image}" class="book-image"/>
-            <p class="book-title">${book.title}</p>
-            <p class="book-year">${book.year}</p>
-            <p class="book-authors">${book.authors}</p>
-            <p class="book-editor">${book.editor}</p>
+function renderBooks() {
+    container.innerHTML = ""
+    books.forEach((book) => {
+        container.innerHTML += `
+            <div class="book" id="book">
+                <img src="${book.image}" class="book-image"/>
+                <p class="book-title">${book.title}</p>
+                <p class="book-year">${book.year}</p>
+                <p class="book-authors">${book.authors}</p>
+                <p class="book-editor">${book.editor}</p>
 
-            <div class="buttons">
-                <button class="change-button">Изменить</button>
-                <button class="delete-button">Удалить</button>
+                <div class="buttons">
+                    <button class="change-button">Изменить</button>
+                    <button class="delete-button">Удалить</button>
+                </div>
             </div>
-        </div>
-    `
-})
+        `
+    })
+}
+
+function clearForm() {
+    document.getElementById('title').value = ""
+    document.getElementById('authors').value = ""
+    document.getElementById('editor').value = ""
+    document.getElementById('year').value = ""
+    document.getElementById('image').value = ""
+}
+
+function addBook() {
+    const titleValue = document.getElementById('title').value
+    const authorsValue = document.getElementById('authors').value
+    const editorValue = document.getElementById('editor').value
+    const yearValue = document.getElementById('year').value
+    const imageValue = document.getElementById('image').value
+
+    const book = {
+        title: titleValue,
+        authors: authorsValue,
+        editor: editorValue,
+        year: yearValue,
+        image: imageValue
+    }
+
+    books.push(book)
+    renderBooks()
+    clearForm()
+}
+
+renderBooks()
