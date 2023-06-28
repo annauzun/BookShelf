@@ -1,5 +1,6 @@
 const books = [
     {
+        id: 1,
         title: 'Живая шляпа и другие любимые рассказы',
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
@@ -8,6 +9,7 @@ const books = [
     },
  
     {
+        id: 2,
         title: 'Денискины рассказы',
         authors: 'Драгунский Виктор Юзефович',
         year: '2022',
@@ -16,6 +18,7 @@ const books = [
     },
  
     {
+        id: 3,
         title: 'Что я видел',
         authors: 'Житков Борис Степанович',
         editor: 'Стрекоза',
@@ -24,6 +27,7 @@ const books = [
     },
  
     {
+        id: 4,
         title: 'Приключения Незнайки и его друзей',
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
@@ -32,6 +36,7 @@ const books = [
     },
 
     {
+        id: 5,
         title: 'В стране невыученных уроков',
         authors: 'Гераскина Лия Борисовна',
         editor: 'Азбука',
@@ -40,6 +45,7 @@ const books = [
     },
  
     {
+        id: 6,
         title: 'Айболит и другие сказки',
         authors: 'Чуковский Корней Иванович',
         editor: 'Стрекоза',
@@ -48,6 +54,18 @@ const books = [
     }
  
 ]
+
+let isOpen = false
+function openForm() {
+    const form = document.getElementById('add-newBook')
+    if (isOpen) {
+        form.style.display = "none"
+        isOpen = false
+    /*} else {
+        form.style.display = "flex"
+        isOpen = true*/
+    }
+}
 
 const container = document.getElementById('container')
 
@@ -64,7 +82,7 @@ function renderBooks() {
 
                 <div class="buttons">
                     <button class="change-button">Изменить</button>
-                    <button class="delete-button">Удалить</button>
+                    <button onclick="deleteBook(${book.id})" class="delete-button">Удалить</button>
                 </div>
             </div>
         `
@@ -77,6 +95,17 @@ function clearForm() {
     document.getElementById('editor').value = ""
     document.getElementById('year').value = ""
     document.getElementById('image').value = ""
+}
+
+function deleteBook(id) {
+    const book = books.find((b) => {
+        return b.id === id
+    })
+
+    const bookIndex = books.indexOf(book)
+
+    books.splice(bookIndex, 1)
+    renderBooks() 
 }
 
 function addBook() {
