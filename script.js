@@ -55,16 +55,13 @@ const books = [
  
 ]
 
-let isOpen = false
+let isClicked
 function openForm() {
-    const form = document.getElementById('add-newBook')
-    if (isOpen) {
-        form.style.display = "none"
-        isOpen = false
-    /*} else {
-        form.style.display = "flex"
-        isOpen = true*/
-    }
+    document.getElementById('add-newBook').style.display = "flex"
+}
+
+function closeForm() {
+    document.getElementById('add-newBook').style.display = "none"
 }
 
 const container = document.getElementById('container')
@@ -126,6 +123,7 @@ function addBook() {
     books.push(book)
     renderBooks()
     clearForm()
+    closeForm()
 }
 
 renderBooks()
