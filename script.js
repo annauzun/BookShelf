@@ -55,7 +55,6 @@ const books = [
  
 ]
 
-let isClicked
 function openForm() {
     document.getElementById('add-newBook').style.display = "flex"
 }
@@ -94,17 +93,6 @@ function clearForm() {
     document.getElementById('image').value = ""
 }
 
-function deleteBook(id) {
-    const book = books.find((b) => {
-        return b.id === id
-    })
-
-    const bookIndex = books.indexOf(book)
-
-    books.splice(bookIndex, 1)
-    renderBooks() 
-}
-
 function addBook() {
     const titleValue = document.getElementById('title').value
     const authorsValue = document.getElementById('authors').value
@@ -124,6 +112,17 @@ function addBook() {
     renderBooks()
     clearForm()
     closeForm()
+}
+
+function deleteBook(id) {
+    const book = books.find((b) => {
+        return b.id === id
+    })
+
+    const bookIndex = books.indexOf(book)
+
+    books.splice(bookIndex, 1)
+    renderBooks() 
 }
 
 renderBooks()

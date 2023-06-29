@@ -6,7 +6,7 @@ html {
     font-family: 'Exo 2', sans-serif;
 }
 
-.hero-text, .hero-author, h1 {
+.hero-text, .hero-author, h1, .label {
     font-family: 'Caveat', cursive;
 }
 
@@ -63,7 +63,6 @@ h1 {
     font-size: 24px;
     padding: 5px 10px;
     border: 1px solid #cbe8e6dc;
-
 }
 
 .hero-button:hover {
@@ -85,6 +84,14 @@ input {
     height: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
+    font-size: 24px;
+    color: #664a2a;
+    border: 1px solid #664a2a;
+    border-radius: 5px;
+    outline-color: #664a2a;
+}
+
+.label {
     font-size: 24px;
 }
 
