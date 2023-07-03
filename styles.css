@@ -57,7 +57,7 @@ h1 {
     width: 55%;
 }
 
-.hero-button {
+#hero-button, #save-button {
     width: auto;
     background-color: #cbe8e6dc;
     font-size: 24px;
@@ -65,7 +65,7 @@ h1 {
     border: 1px solid #cbe8e6dc;
 }
 
-.hero-button:hover {
+#hero-button:hover, #save-button:hover {
     border: 1px solid #c5d1dd;
     box-shadow: 3px 3px 3px #c5d1dd;
 }    

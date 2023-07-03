@@ -63,6 +63,9 @@ function closeForm() {
     document.getElementById('add-newBook').style.display = "none"
 }
 
+const openFormButton = document.getElementById('hero-button')
+openFormButton.addEventListener('click', openForm)
+
 const container = document.getElementById('container')
 
 function renderBooks() {
@@ -79,6 +82,7 @@ function renderBooks() {
                 <div class="buttons">
                     <button class="change-button">Изменить</button>
                     <button onclick="deleteBook(${book.id})" class="delete-button">Удалить</button>
+                    
                 </div>
             </div>
         `
@@ -113,6 +117,9 @@ function addBook() {
     clearForm()
     closeForm()
 }
+
+const addBookButton = document.getElementById('save-button')
+addBookButton.addEventListener('click', addBook)
 
 function deleteBook(id) {
     const book = books.find((b) => {
