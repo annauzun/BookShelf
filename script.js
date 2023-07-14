@@ -55,16 +55,19 @@ const books = [
  
 ]
 
-function openForm() {
+function openModal() {
     document.getElementById('add-newBook').style.display = "flex"
 }
 
-function closeForm() {
+function closeModal() {
     document.getElementById('add-newBook').style.display = "none"
 }
 
-const openFormButton = document.getElementById('hero-button')
-openFormButton.addEventListener('click', openForm)
+const openModalButton = document.getElementById('add-modal-button')
+openModalButton.addEventListener('click', openModal)
+
+const closeModalButton = document.getElementById('close-modal-button')
+closeModalButton.addEventListener('click', closeModal)
 
 const container = document.getElementById('container')
 
@@ -82,7 +85,7 @@ function renderBooks() {
                 <div class="buttons">
                     <button class="change-button">Изменить</button>
                     <button onclick="deleteBook(${book.id})" class="delete-button">Удалить</button>
-                    
+
                 </div>
             </div>
         `
@@ -115,7 +118,7 @@ function addBook() {
     books.push(book)
     renderBooks()
     clearForm()
-    closeForm()
+    closeModal()
 }
 
 const addBookButton = document.getElementById('save-button')

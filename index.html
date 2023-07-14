@@ -17,34 +17,41 @@
                 <h1>Книги детям</h1>
                 <p class="hero-text">Любите книгу всей душой! Она не только ваш лучший друг, но и до конца верный спутник!</p>
                 <p class="hero-author">Михаил Шолохов</p>
-                <button id="hero-button">Добавить книгу</button>
+                <button id="add-modal-button">Добавить книгу</button>
             </div>
         </div>
 
         <div class="section">
             <div id="add-newBook">
-                <div>
-                    <p class="label">Название книги</p>
-                    <input id="title" />
-                </div>
-                <div>
-                    <p class="label">Автор книги</p>
-                    <input id="authors" />
-                </div>
-                <div>
-                    <p class="label">Издательство</p>
-                    <input id="editor" />
-                </div>
-                <div>
-                    <p class="label">Год издания книги</p>
-                    <input id="year" />
-                </div>
-                <div>
-                    <p class="label">Ссылка на изображение</p>
-                    <input id="image" />
-                </div>
+                <div id="add-modal-content">
+                    <div>
+                        <p class="label">Название книги</p>
+                        <input id="title" />
+                    </div>
+                    <div>
+                        <p class="label">Автор книги</p>
+                        <input id="authors" />
+                    </div>
+                    <div>
+                        <p class="label">Издательство</p>
+                        <input id="editor" />
+                    </div>
+                    <div>
+                        <p class="label">Год издания книги</p>
+                        <input id="year" />
+                    </div>
+                    <div>
+                        <p class="label">Ссылка на изображение</p>
+                        <input id="image" />
+                    </div>
 
-                <button id="save-button">Сохранить</button>
+                    <br/ >
+                    <br/ >
+                    <div class="modal-buttons">
+                        <button id="save-button">Сохранить</button>
+                        <button id="close-modal-button">Закрыть</button>
+                    </div>
+                </div>
             </div>
 
             <div id="container"></div>
