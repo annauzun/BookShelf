@@ -1,4 +1,4 @@
-const books = [
+let books = [
     {
         id: 1,
         title: 'Живая шляпа и другие любимые рассказы',
@@ -71,6 +71,11 @@ closeModalButton.addEventListener('click', closeModal)
 
 const container = document.getElementById('container')
 
+function saveToLocalStorage() {
+    const booksJson = JSON.stringify(books)
+    localStorage.setItem('books', booksJson)
+}
+
 function renderBooks() {
     container.innerHTML = ""
     books.forEach((book) => {
@@ -90,6 +95,7 @@ function renderBooks() {
             </div>
         `
     })
+
 }
 
 function clearForm() {
@@ -119,10 +125,8 @@ function addBook() {
     renderBooks()
     clearForm()
     closeModal()
+    saveToLocalStorage()
 }
-
-const addBookButton = document.getElementById('save-button')
-addBookButton.addEventListener('click', addBook)
 
 function deleteBook(id) {
     const book = books.find((b) => {
@@ -133,6 +137,15 @@ function deleteBook(id) {
 
     books.splice(bookIndex, 1)
     renderBooks() 
+    saveToLocalStorage()
 }
 
+const addBookButton = document.getElementById('save-button')
+addBookButton.addEventListener('click', addBook)
+
+const booksJson = localStorage.getItem('books')
+    if (booksJson) {
+        books = JSON.parse(booksJson);
+    }
+    
 renderBooks()
