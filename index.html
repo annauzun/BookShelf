@@ -23,7 +23,9 @@
 
         <div class="section">
             <div id="add-newBook">
-                <div id="add-modal-content">
+                <div class="add-modal-content">
+                    <p class="new-book-text">Данные новой книги</p>
+                    <br/ >
                     <div>
                         <p class="label">Название книги</p>
                         <input id="title" />
@@ -54,6 +56,40 @@
                 </div>
             </div>
 
+            <div id="update-book">
+                <div class="add-modal-content">
+                    <p class="update-book-text">Изменить данные книги</p>
+                    <br/ >
+                    <div>
+                        <p class="label">Название книги</p>
+                        <input id="update-title" />
+                    </div>
+                    <div>
+                        <p class="label">Автор книги</p>
+                        <input id="update-authors" />
+                    </div>
+                    <div>
+                        <p class="label">Издательство</p>
+                        <input id="update-editor" />
+                    </div>
+                    <div>
+                        <p class="label">Год издания книги</p>
+                        <input id="update-year" />
+                    </div>
+                    <div>
+                        <p class="label">Ссылка на изображение</p>
+                        <input id="update-image" />
+                    </div>
+        
+                    <br/ >
+                    <br/ >
+                    <div class="modal-buttons">
+                        <button id="update-button">Обновить</button>
+                        <button id="close-update-button">Отменить</button>
+                    </div>
+                </div>
+            </div>
+            
             <div id="container"></div>
         </div>
       

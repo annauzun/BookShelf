@@ -69,12 +69,12 @@ openModalButton.addEventListener('click', openModal)
 const closeModalButton = document.getElementById('close-modal-button')
 closeModalButton.addEventListener('click', closeModal)
 
-const container = document.getElementById('container')
-
 function saveToLocalStorage() {
     const booksJson = JSON.stringify(books)
     localStorage.setItem('books', booksJson)
 }
+
+const container = document.getElementById('container')
 
 function renderBooks() {
     container.innerHTML = ""
@@ -88,8 +88,8 @@ function renderBooks() {
                 <p class="book-editor">${book.editor}</p>
 
                 <div class="buttons">
-                    <button class="change-button">Изменить</button>
-                    <button onclick="deleteBook(${book.id})" class="delete-button">Удалить</button>
+                    <button onclick='updateBook(${book.id})'>Изменить</button>
+                    <button onclick='deleteBook(${book.id})'>Удалить</button>
 
                 </div>
             </div>
@@ -142,6 +142,66 @@ function deleteBook(id) {
 
 const addBookButton = document.getElementById('save-button')
 addBookButton.addEventListener('click', addBook)
+
+
+const updateWindow = document.getElementById('update-book')
+
+function updateInput(book) {
+    document.getElementById('update-title').value = book.title
+    document.getElementById('update-authors').value = book.authors
+    document.getElementById('update-editor').value = book.editor
+    document.getElementById('update-year').value = book.year
+    document.getElementById('update-image').value = book.image
+
+}
+
+function updateBook(id) {
+    updateWindow.style.display = "flex"
+
+    const book = books.find((b) => {
+        return b.id === id
+    })
+
+    updateInput(book)
+
+    const update = document.getElementById('update-button')
+    update.addEventListener('click', makeUpdate)
+}
+
+function makeUpdate(id) {
+
+    let book = books.find((b) => {
+        return b.id === id
+    })
+
+    const bookIndexUpdate = books.indexOf(book)
+   
+    const updateTitle = document.getElementById('update-title').value
+    const updateAuthors = document.getElementById('update-authors').value
+    const updateEditor = document.getElementById('update-editor').value
+    const updateYear = document.getElementById('update-year').value
+    const updateImage = document.getElementById('update-image').value
+    
+    const updatedBook = {
+        title: updateTitle,
+        authors: updateAuthors,
+        editor: updateEditor,
+        year: updateYear,
+        image: updateImage
+    }
+
+    books.splice(bookIndexUpdate, 1, updatedBook)
+    renderBooks()
+    saveToLocalStorage()
+    closeUpdateWindow()
+}
+
+const closeUpdateButton = document.getElementById('close-update-button')
+closeUpdateButton.addEventListener('click', closeUpdateWindow)
+
+function closeUpdateWindow() {
+    updateWindow.style.display = "none"
+}
 
 const booksJson = localStorage.getItem('books')
     if (booksJson) {
