@@ -1,6 +1,8 @@
+let count = 1
+
 let books = [
     {
-        id: 1,
+        id: count++,
         title: 'Живая шляпа и другие любимые рассказы',
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
@@ -9,7 +11,7 @@ let books = [
     },
  
     {
-        id: 2,
+        id: count++,
         title: 'Денискины рассказы',
         authors: 'Драгунский Виктор Юзефович',
         year: '2022',
@@ -18,7 +20,7 @@ let books = [
     },
  
     {
-        id: 3,
+        id: count++,
         title: 'Что я видел',
         authors: 'Житков Борис Степанович',
         editor: 'Стрекоза',
@@ -27,7 +29,7 @@ let books = [
     },
  
     {
-        id: 4,
+        id: count++,
         title: 'Приключения Незнайки и его друзей',
         authors: 'Носов Николай Николаевич',
         editor: 'Махаон',
@@ -36,7 +38,7 @@ let books = [
     },
 
     {
-        id: 5,
+        id: count++,
         title: 'В стране невыученных уроков',
         authors: 'Гераскина Лия Борисовна',
         editor: 'Азбука',
@@ -45,7 +47,7 @@ let books = [
     },
  
     {
-        id: 6,
+        id: count++,
         title: 'Айболит и другие сказки',
         authors: 'Чуковский Корней Иванович',
         editor: 'Стрекоза',
@@ -114,6 +116,7 @@ function addBook() {
     const imageValue = document.getElementById('image').value
 
     const book = {
+        id: count++,
         title: titleValue,
         authors: authorsValue,
         editor: editorValue,
@@ -143,9 +146,6 @@ function deleteBook(id) {
 const addBookButton = document.getElementById('save-button')
 addBookButton.addEventListener('click', addBook)
 
-
-const updateWindow = document.getElementById('update-book')
-
 function updateInput(book) {
     document.getElementById('update-title').value = book.title
     document.getElementById('update-authors').value = book.authors
@@ -155,14 +155,16 @@ function updateInput(book) {
 
 }
 
+const updateWindow = document.getElementById('update-book')
+
 function updateBook(id) {
     updateWindow.style.display = "flex"
 
-    const book = books.find((b) => {
+    const bookUpdate = books.find((b) => {
         return b.id === id
     })
 
-    updateInput(book)
+    updateInput(bookUpdate)
 
     const update = document.getElementById('update-button')
     update.addEventListener('click', makeUpdate)
@@ -170,11 +172,7 @@ function updateBook(id) {
 
 function makeUpdate(id) {
 
-    let book = books.find((b) => {
-        return b.id === id
-    })
-
-    const bookIndexUpdate = books.indexOf(book)
+    
    
     const updateTitle = document.getElementById('update-title').value
     const updateAuthors = document.getElementById('update-authors').value
@@ -183,6 +181,7 @@ function makeUpdate(id) {
     const updateImage = document.getElementById('update-image').value
     
     const updatedBook = {
+        id,
         title: updateTitle,
         authors: updateAuthors,
         editor: updateEditor,
@@ -190,7 +189,14 @@ function makeUpdate(id) {
         image: updateImage
     }
 
-    books.splice(bookIndexUpdate, 1, updatedBook)
+    const book = books.find((b) => {
+        return b.id === id
+    })
+
+    const bookIndex = books.indexOf(book)
+    books.splice(bookIndex, 1, updatedBook)
+    
+    
     renderBooks()
     saveToLocalStorage()
     closeUpdateWindow()
