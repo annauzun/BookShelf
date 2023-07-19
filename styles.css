@@ -6,7 +6,7 @@ html {
     font-family: 'Exo 2', sans-serif;
 }
 
-.hero-text, .hero-author, h1, .label {
+.hero-text, .hero-author, h1, .label, .new-book-text, .update-book-text {
     font-family: 'Caveat', cursive;
 }
 
@@ -114,7 +114,7 @@ h1 {
 }
 
 input {
-    width: 500px;
+    width: 100%;
     height: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -126,7 +126,8 @@ input {
 }
 
 .new-book-text, .update-book-text {
-    font-size: 24px;
+    font-size: 48px;
+    text-align: center;
 }
 
 .label {
@@ -194,11 +195,7 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 1024px) {
-    input {
-        width: 300px;
-    }
-    
+@media (max-width: 1024px) {  
     h1 {
         font-size: 60px;
     }
@@ -212,7 +209,6 @@ button {
 
 @media (max-width: 768px) {
     input {
-        width: 250px;
         height: 20px;
         font-size: 18px;
     }
