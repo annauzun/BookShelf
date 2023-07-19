@@ -1,5 +1,7 @@
+//счетчик для id книг
 let count = 1
 
+//массив книг
 let books = [
     {
         id: count++,
@@ -57,30 +59,36 @@ let books = [
  
 ]
 
-function openModal() {
-    document.getElementById('add-newBook').style.display = "flex"
+//сохранить изменения в Local Storage
+function saveToLocalStorage() {
+    const booksJson = JSON.stringify(books) //переводим из JS в JSON
+    localStorage.setItem('books', booksJson)
 }
 
-function closeModal() {
-    document.getElementById('add-newBook').style.display = "none"
+//открыть модальное окно при клике на кнопку "добавить книгу"
+function openModal() {
+    document.getElementById('add-newBook').style.display = "flex"
 }
 
 const openModalButton = document.getElementById('add-modal-button')
 openModalButton.addEventListener('click', openModal)
 
+
+//закрыть модальное окно при клике на кнопку "закрыть"
+function closeModal() {
+    document.getElementById('add-newBook').style.display = "none"
+}
+
 const closeModalButton = document.getElementById('close-modal-button')
 closeModalButton.addEventListener('click', closeModal)
 
-function saveToLocalStorage() {
-    const booksJson = JSON.stringify(books)
-    localStorage.setItem('books', booksJson)
-}
-
+//найти в HTML контейнер для выгрузки книг
 const container = document.getElementById('container')
 
+//"прорисовать"  книги в контейнере
 function renderBooks() {
-    container.innerHTML = ""
-    books.forEach((book) => {
+    container.innerHTML = "" //пустой контейнер
+    books.forEach((book) => { //карточки для каждой книги
         container.innerHTML += `
             <div class="book" id="book">
                 <img src="${book.image}" class="book-image"/>
@@ -90,16 +98,30 @@ function renderBooks() {
                 <p class="book-editor">${book.editor}</p>
 
                 <div class="buttons">
-                    <button onclick='updateBook(${book.id})'>Изменить</button>
-                    <button onclick='deleteBook(${book.id})'>Удалить</button>
-
+                    <button id="updateBook-${book.id}">Изменить</button>
+                    <button id="deleteBook-${book.id}">Удалить</button>
                 </div>
             </div>
         `
     })
 
+    //для каждой книги при нажатии на кнопку "изменить" вызывается функция обновления книги
+    books.forEach((book) => {
+        document.getElementById(`updateBook-${book.id}`).addEventListener('click', () => {
+            updateBook(book.id)
+            })
+    })
+
+    //для каждой книги при нажатии на кнопку "удалить" вызывается функция удаления книги
+    books.forEach((book) => {
+        document.getElementById(`deleteBook-${book.id}`).addEventListener('click', () => {
+            deleteBook(book.id)
+            })
+    })
+
 }
 
+//очистить форму - поля ввода данных модального окна
 function clearForm() {
     document.getElementById('title').value = ""
     document.getElementById('authors').value = ""
@@ -108,14 +130,18 @@ function clearForm() {
     document.getElementById('image').value = ""
 }
 
-function addBook() {
+//добавить новую книгу при нажатии на кнопку "сохранить"
+const addBookButton = document.getElementById('save-button')
+addBookButton.addEventListener('click', addBook)
+
+function addBook() { //получить значения из полей ввода данных модального окна
     const titleValue = document.getElementById('title').value
     const authorsValue = document.getElementById('authors').value
     const editorValue = document.getElementById('editor').value
     const yearValue = document.getElementById('year').value
     const imageValue = document.getElementById('image').value
 
-    const book = {
+    const book = { //новая книга с полученными данными
         id: count++,
         title: titleValue,
         authors: authorsValue,
@@ -124,64 +150,71 @@ function addBook() {
         image: imageValue
     }
 
-    books.push(book)
-    renderBooks()
-    clearForm()
-    closeModal()
-    saveToLocalStorage()
+    books.push(book) //добавить новую книгу в конец массива
+    renderBooks() //"прорисовать" новый массив с изменениями
+    clearForm() //очистить поля ввода
+    closeModal() //закрыть модальное окно
+    saveToLocalStorage() //сохранить изменения в Local Storage
 }
 
+//удалить книгу, определенную по id
 function deleteBook(id) {
-    const book = books.find((b) => {
+    
+    const book = books.find((b) => { //найти книгу по id
         return b.id === id
     })
 
-    const bookIndex = books.indexOf(book)
+    const bookIndex = books.indexOf(book) //определить индекс книги в массиве
+    
+    books.splice(bookIndex, 1) //удалить 1 книгу из массива начиная с указанного индекса
 
-    books.splice(bookIndex, 1)
-    renderBooks() 
-    saveToLocalStorage()
+    renderBooks() //"прорисовать" новый массив с изменениями
+    saveToLocalStorage() //сохранить изменеия в Local Storage
 }
 
-const addBookButton = document.getElementById('save-button')
-addBookButton.addEventListener('click', addBook)
+//переводим из JSON в JS
+const booksJson = localStorage.getItem('books')
+    if (booksJson) {
+        books = JSON.parse(booksJson);
+    }
 
+//получить данные полей книги, которую будем обновлять
 function updateInput(book) {
     document.getElementById('update-title').value = book.title
     document.getElementById('update-authors').value = book.authors
     document.getElementById('update-editor').value = book.editor
     document.getElementById('update-year').value = book.year
     document.getElementById('update-image').value = book.image
-
 }
 
+//найти элемент окна обновления книги
 const updateWindow = document.getElementById('update-book')
 
 function updateBook(id) {
-    updateWindow.style.display = "flex"
-
-    const bookUpdate = books.find((b) => {
-        return b.id === id
+    updateWindow.style.display = "flex" //открыть модальное окно обновления книги
+    
+    let book = books.find((u) => { //найти книгу по id
+        return u.id === id
     })
 
-    updateInput(bookUpdate)
+    updateInput(book) //получить данные полей ввода конкретной книги
 
+    //при нажатии на кнопку "обновить" вызывается функция обновления данных книги
     const update = document.getElementById('update-button')
     update.addEventListener('click', makeUpdate)
 }
 
+//обновить данные книги
 function makeUpdate(id) {
-
-    
-   
+  
     const updateTitle = document.getElementById('update-title').value
     const updateAuthors = document.getElementById('update-authors').value
     const updateEditor = document.getElementById('update-editor').value
     const updateYear = document.getElementById('update-year').value
     const updateImage = document.getElementById('update-image').value
     
-    const updatedBook = {
-        id,
+    const updatedBook = { //создаем новую книгу с обновленными данными
+        id: count++,
         title: updateTitle,
         authors: updateAuthors,
         editor: updateEditor,
@@ -189,29 +222,25 @@ function makeUpdate(id) {
         image: updateImage
     }
 
-    const book = books.find((b) => {
-        return b.id === id
+    const book = books.find((b) => { //найти книгу по id
+        return b.id === id 
     })
 
-    const bookIndex = books.indexOf(book)
-    books.splice(bookIndex, 1, updatedBook)
-    
-    
-    renderBooks()
-    saveToLocalStorage()
-    closeUpdateWindow()
+    const bookIndex = books.indexOf(book) //определить индекс книги
+
+    books.splice(bookIndex, 1, updatedBook) //удалить 1 книгу из массива начиная с указанного индекса и заменить ее на книгу с обновленнымии данными
+        
+    renderBooks() //"прорисовать" новый массив с изменениями
+    saveToLocalStorage() //сохранить изменеия в Local Storage
+    closeUpdateWindow() //закрыть модальное окно обновленной книги
 }
 
+//закрыть модальное окно обновления книги
 const closeUpdateButton = document.getElementById('close-update-button')
 closeUpdateButton.addEventListener('click', closeUpdateWindow)
 
 function closeUpdateWindow() {
     updateWindow.style.display = "none"
 }
-
-const booksJson = localStorage.getItem('books')
-    if (booksJson) {
-        books = JSON.parse(booksJson);
-    }
     
 renderBooks()
