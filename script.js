@@ -189,24 +189,27 @@ function updateInput(book) {
 
 //найти элемент окна обновления книги
 const updateWindow = document.getElementById('update-book')
+let currentBookId
 
 function updateBook(id) {
+    currentBookId = id
     updateWindow.style.display = "flex" //открыть модальное окно обновления книги
+    
     
     let book = books.find((u) => { //найти книгу по id
         return u.id === id
     })
 
     updateInput(book) //получить данные полей ввода конкретной книги
-
+    
     //при нажатии на кнопку "обновить" вызывается функция обновления данных книги
     const update = document.getElementById('update-button')
     update.addEventListener('click', makeUpdate)
 }
 
 //обновить данные книги
-function makeUpdate(id) {
-  
+function makeUpdate() {
+    
     const updateTitle = document.getElementById('update-title').value
     const updateAuthors = document.getElementById('update-authors').value
     const updateEditor = document.getElementById('update-editor').value
@@ -214,7 +217,7 @@ function makeUpdate(id) {
     const updateImage = document.getElementById('update-image').value
     
     const updatedBook = { //создаем новую книгу с обновленными данными
-        id: count++,
+        id: currentBookId,
         title: updateTitle,
         authors: updateAuthors,
         editor: updateEditor,
@@ -222,11 +225,16 @@ function makeUpdate(id) {
         image: updateImage
     }
 
+    //console.log(updatedBook)
+
     const book = books.find((b) => { //найти книгу по id
-        return b.id === id 
+        return b.id === currentBookId 
     })
 
+    
     const bookIndex = books.indexOf(book) //определить индекс книги
+
+    
 
     books.splice(bookIndex, 1, updatedBook) //удалить 1 книгу из массива начиная с указанного индекса и заменить ее на книгу с обновленнымии данными
         

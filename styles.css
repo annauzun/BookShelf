@@ -83,7 +83,7 @@ h1 {
 }
 
 #add-newBook {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -95,7 +95,7 @@ h1 {
 }
 
 #update-book {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
