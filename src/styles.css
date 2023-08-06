@@ -15,7 +15,7 @@ body {
 }
 
 #hero {
-    background-image: linear-gradient(to top, #ffe6d478, #ffe6d43c), url(wallpaperbetter.jpg);
+    background-image: linear-gradient(to top, #ffe6d478, #ffe6d43c), url(/src/wallpaperbetter.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
