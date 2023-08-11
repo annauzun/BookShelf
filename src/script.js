@@ -72,14 +72,6 @@ function openModal() {
 const openModalButton = document.getElementById("add-modal-button")
 openModalButton.addEventListener("click", openModal)
 
-//закрыть модальное окно при клике на кнопку "закрыть"
-function closeModal() {
-    document.getElementById("add-newBook").style.display = "none"
-}
-
-const closeModalButton = document.getElementById("close-modal-button")
-closeModalButton.addEventListener("click", closeModal)
-
 //найти в HTML контейнер для выгрузки книг
 const container = document.getElementById("container")
 
@@ -93,6 +85,7 @@ function renderBooks() {
                 <img src="${book.image}" class="book-image"/>
                 <p class="book-title">${book.title}</p>
                 <p class="book-year">${book.year}</p>
+
                 <p class="book-authors">${book.authors}</p>
                 <p class="book-editor">${book.editor}</p>
 
@@ -130,6 +123,7 @@ function clearForm() {
     document.getElementById("editor").value = ""
     document.getElementById("year").value = ""
     document.getElementById("image").value = ""
+    
 }
 
 //добавить новую книгу при нажатии на кнопку "сохранить"
@@ -143,6 +137,12 @@ function addBook() {
     const editorValue = document.getElementById("editor").value
     const yearValue = document.getElementById("year").value
     const imageValue = document.getElementById("image").value
+
+    //проверяем если заполнены все поля, если не заполнены - выводим ошибку
+    if(titleValue === "" || authorsValue === "" || editorValue === "" || yearValue === "" || imageValue === "") {
+        document.getElementById("new-book-error").style.display = "flex"
+        return
+    }
 
     const book = {
         //новая книга с полученными данными
@@ -160,6 +160,17 @@ function addBook() {
     closeModal() //закрыть модальное окно
     saveToLocalStorage() //сохранить изменения в Local Storage
 }
+
+//закрыть модальное окно при клике на кнопку "закрыть"
+function closeModal() {
+    clearForm()
+    document.getElementById("new-book-error").style.display = "none"
+    document.getElementById("add-newBook").style.display = "none"
+    
+}
+
+const closeModalButton = document.getElementById("close-modal-button")
+closeModalButton.addEventListener("click", closeModal)
 
 //удалить книгу, определенную по id
 function deleteBook(id) {
@@ -219,6 +230,12 @@ function makeUpdate() {
     const updateYear = document.getElementById("update-year").value
     const updateImage = document.getElementById("update-image").value
 
+    //проверяем если заполнены все поля, если не заполнены - выводим ошибку
+    if(updateTitle === "" || updateAuthors === "" || updateEditor === "" || updateYear === "" || updateImage === "") {
+        document.getElementById("update-book-error").style.display = "flex"
+        return
+    }
+
     const updatedBook = {
         //создаем новую книгу с обновленными данными
         id: currentBookId,
@@ -228,8 +245,6 @@ function makeUpdate() {
         year: updateYear,
         image: updateImage,
     }
-
-    //console.log(updatedBook)
 
     const book = books.find((b) => {
         //найти книгу по id
@@ -250,6 +265,7 @@ const closeUpdateButton = document.getElementById("close-update-button")
 closeUpdateButton.addEventListener("click", closeUpdateWindow)
 
 function closeUpdateWindow() {
+    document.getElementById("update-book-error").style.display = "none"
     updateWindow.style.display = "none"
 }
 

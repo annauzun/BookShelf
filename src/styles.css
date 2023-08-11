@@ -115,6 +115,14 @@ h1 {
     align-items: center;
 }
 
+#new-book-error,
+#update-book-error {
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    display: none;
+}
+
 .add-modal-content {
     background-color: white;
     padding: 35px;
